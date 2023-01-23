@@ -88,11 +88,6 @@ const ViewBooks = () => {
               </a>
             </li>
             <li>
-              <a href="/addbook" className="nav-link">
-                View Books
-              </a>
-            </li>
-            <li>
               <a className="nav-link" id="logout" onClick={handleLogout}>
                 Logout
               </a>
@@ -127,6 +122,7 @@ const ViewBooks = () => {
                 <th>Price</th>
                 <th>Quantity</th>
                 <th>Description</th>
+                <th>Book Image</th>
               </tr>
             </thead>
             <tbody>
@@ -138,7 +134,7 @@ const ViewBooks = () => {
                   <td>{user.price}</td>
                   <td>{user.quantity}</td>
                   <td>{user.description}</td>
-                  <td><img src={user.profile_path} style={{height:90}} /></td>
+                  <td><img src={user.image} style={{height:90}} /></td>
                   <td>
                     <Link
                       to={`/update-book/${user._id}`}

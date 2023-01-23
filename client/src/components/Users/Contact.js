@@ -72,6 +72,16 @@ const Contact = () => {
               </a>
             </li>
             <li>
+              <a href="/addbook" className="nav-link">
+                ADD BOOKS
+              </a>
+            </li>
+            <li>
+              <a href="/viewbook" className="nav-link">
+                VIEW BOOKS
+              </a>
+            </li>
+            <li>
               <a className="nav-link" id="logout" onClick={handleLogout}>
                 Logout
               </a>

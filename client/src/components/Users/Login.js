@@ -54,7 +54,7 @@ const Login = () => {
 
 
   return (
-    <div>
+    <div className="back">
         <div>
      <div class="wave"></div>
      <div class="wave"></div>

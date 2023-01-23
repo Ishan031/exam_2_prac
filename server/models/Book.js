@@ -9,20 +9,18 @@ let Book = new Schema({
         type:String
     },
     price:{
-
         type:String
     },
     quantity:{
         type:String
     },
     description : {
-        type : String
+        type:String
+    },
+    image: {
+        type:String
     }
-
-
     // Bookimage: { type: String, required: true },
-
-  
 },
 {
     collection:'book'

@@ -117,19 +117,6 @@ router.get("/get", async (req,res)=>{
     }   
 })
 
-                // image upload Formdata
-// router.patch("/update/:id", file.single('testimage'), async(req,res)=>{
-//     try {
-//         let img =req.file.filename
-//         req.body.image = img
-//         let path = req.file.path
-//         req.body.profile_path = "http://localhost:2000/" + img
-//         const updateduser = await User.updateOne({_id:req.params.id}, {$set: req.body});
-//         res.status(200).json(updateduser);
-//     } catch (error) {
-//         res.status(400).json({message: "User update unsuccessfull"});}
-// });
-
 router.patch("/update/:id", multer.any(), async(req,res)=>{
     try {  
         const updateduser = await User.updateOne({_id:req.params.id}, {$set: req.body});
@@ -148,15 +135,32 @@ router.delete("/delete/:id", async(req,res)=>{
     }
 })
 
-router.post('/add-book' , (req, res, next) => {
-    Book.create(req.body, (error, data) => {
-        if (error) {
-            return next(error);
-        } else {
-            res.json(data)
-        }
-    });
-});
+// router.post('/add-book' , uploadImage, (req, res, next) => {
+//     Book.create(req.body, (error, data) => {
+//         if (error) {
+//             return next(error);
+//         } else {
+//             res.json(data)
+//         }
+//     });
+// });
+
+router.post('/add-book', uploadImage,async(req,res)=>{
+    
+    const { name , author ,price , quantity , description} = req.body;
+    const image = 'http://localhost:2000/'+req.file.filename;
+    console.log(image);
+    if (!name || !author ||!price ||!quantity ||!description || name == "" || author == "" || price == "" || description == ""){
+        return res.status(404).json({error:" Please enter all the details "});
+    }
+    try{
+                const book = new Book({ name,author,price,description,quantity,image});
+                res.status(200).json({message:"Book registered successfully"});
+                 book.save();
+    }catch(err){
+        console.log(err);
+    }
+})
 
 router.get('/book',(req, res) => {
     Book.find((error, data) => {

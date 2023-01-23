@@ -30,6 +30,11 @@ const Signup = () => {
     loginverfy();
   }, []);
 
+  const [file, setFile] = useState("");
+  const onInputChange = (e) =>{
+    setFile(e.target.files[0])
+    console.log(file);
+  }
 
   const loginverfy = () => {
     if (!localStorage.getItem("token")) {
@@ -49,17 +54,17 @@ const Signup = () => {
   
   const postData = async (e) => {
     const { name, author, price, quantity , description } = user;
+    let formdata = new FormData()
+    formdata.append('name',user.name)
+    formdata.append('author',user.author)
+    formdata.append('price',user.price)
+    formdata.append('quantity',user.quantity)
+    formdata.append('description' , user.description)
+    formdata.append('photo' , file)
     e.preventDefault();
     try {
       const res = await axios.post(
-        "http://localhost:2000/add-book",
-        {
-          name,
-          author,
-          price,
-          quantity,
-          description,
-        }
+        "http://localhost:2000/add-book",formdata
       );
       // console.log(res);
 
@@ -69,7 +74,7 @@ const Signup = () => {
       } else {
         window.alert("Registeration Successfull");
         console.log("Registeration Successfull");
-        history("/home");
+        history("/viewbook");
       }
     } catch (error) {
       console.log("error");
@@ -153,7 +158,10 @@ const Signup = () => {
                     type="text"
                   />
                 </div>
-                
+                <div>
+                    <input type="file" name="photo" 
+                    onChange={onInputChange}/>
+                  </div>
                 <MDBBtn
                   className="mb-5"
                   size="lg"

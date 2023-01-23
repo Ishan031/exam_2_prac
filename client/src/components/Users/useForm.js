@@ -201,9 +201,7 @@ const Register = () => {
                     Already a user?
                   </NavLink>
                   <MDBBtn
-                  className="mb-5"
-                  size="lg"
-                  id="signup"
+                  id="regbtn"
                 >
                   Register
                 </MDBBtn>

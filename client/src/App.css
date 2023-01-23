@@ -105,7 +105,7 @@ select.input-error {
   background-blend-mode: overlay, overlay, difference, difference, difference, normal;
 } */
 
-body {
+body .back{
   margin: auto;
   font-family: -apple-system, BlinkMacSystemFont, sans-serif;
   overflow: auto;
@@ -194,4 +194,13 @@ body {
 } 
 #form2{
   opacity: 0.8;
+}
+
+.back{
+  height: 663px;
+}
+
+.regbtn{
+  height: 10px;
+  max-height: 10px;
 }
