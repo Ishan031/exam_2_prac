@@ -48,7 +48,7 @@ const Editbook = () => {
   const updateUser = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`http://localhost:2000/update-book/${id}`, {
+      await axios.patch(`http://localhost:2000/update-book/${id}`, {
         name,
         author,
         price,

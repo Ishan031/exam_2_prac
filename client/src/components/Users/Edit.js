@@ -6,47 +6,43 @@ import { NavLink } from "react-router-dom";
 import { Card, Button } from "react-bootstrap";
 
 const Edit = () => {
+  let formdata = new FormData();
+
   const { id } = useParams();
   const history = useNavigate();
   const [name, setName] = useState();
   const [email, setEmail] = useState();
   const [number,setNumber] = useState();
-  const [image, setimage] = useState("");
-
+  const [file, setFile] = useState("");
+  
   useEffect(() => {
     getUserById();
   }, []);
+  
+  const onInputChange = (e) =>{
+    setFile(e.target.files[0])
+    console.log(file);
+  }
 
-  //image upload
-  // const fileChange=(e)=>
-  // {
-  //   setImage(URL.createObjectURL(e.target.files[0]))
-  //   console.log(e.target.files[0]);
-  // }
-  // localStorage.setItem("image",image)
-  // let formData = new FormData();
-
-    const getUserById = async () => {
+  const getUserById = async () => {
     const response = await axios.get(`http://localhost:2000/get/${id}`);
     setName(response.data.name);
     setEmail(response.data.email);
     setNumber(response.data.number)
-    // setimg(response.data.profile_path);
+    // setFile(response.data.image);
     console.log(response);
-
-    // formData.append('name', name )
-    // formData.append('email', email )
-    // formData.append('image', image )
-    // console.log(formData);
+    
+    
   };
   const updateUser = async (e) => {
+    formdata.append('name', name )  
+    formdata.append('email', email )
+    formdata.append('number',number)
+    formdata.append('photo', file )
+    console.log(formdata);
     e.preventDefault();
     try {
-      await axios.patch(`http://localhost:2000/update/${id}`, {
-        name,
-        email,
-        number,
-      });
+      await axios.patch(`http://localhost:2000/update/${id}`,formdata);
       history("/about");
       window.alert("User Updated Successfully");
     } catch (error) {
@@ -54,6 +50,8 @@ const Edit = () => {
       window.alert("Operation Failed");
     }
   };
+
+  const downkey = ["*", "-" , "=" , "/" , "+" , "." , "," , "[" , "]" , "{" , "}" , "'" , ";" , "_" , "`" , "!" , "@" , "#" , "$" , "%" , "^" , "&" , "(" , ")" , ":" , ">" , "<" , "?" , "|" ,"\""];
   return (
     <>
       <Card style={{ width: "30rem", height: "18rem", margin: "10rem" }}>
@@ -64,7 +62,9 @@ const Edit = () => {
             <div className="field" style={{ marginLeft: 90 , marginTop:-50 }}>
               <label className="label">Name</label>
               <div className="control">
-                <input
+                <input onKeyDown={(e) =>
+                    downkey.includes(e.key) && e.preventDefault()
+                  }
                   type="text"
                   className="input"
                   value={name}
@@ -97,7 +97,6 @@ const Edit = () => {
                 />
               </div>
             </div>
-            
             <div className="field">
               <div className="control">
                 <button

@@ -76,10 +76,12 @@ const Register = () => {
     },
   });
 
-  const downkey = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "*", "-" , "=" , "/" , "+" , "." , "," , "[" , "]" , "{" , "}" , "'" , ";" , "_" , "`" , "!" , "@" , "#" , "$" , "%" , "^" , "&" , "(" , ")" , ":" , ">" , "<" , "?" , "|" ,"\""];
+  const downkey = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "*", "-" , "=" , "/" , "+" , "." , "," , "[" , "]" , "{" , "}" , "'" , ";" , "_" , "`" , "!" , "@" , "#" , "$" , "%" , "^" , "&" , "(" , ")" , ":" , ">" , "<" , "?" , "|" ,"\"","~" , "`"];
  
   const emailverify = ["+" , "=" , ")" , "(" , "*" , "&" , "%" , "#" , "!" , "^" , "$"]
   
+  const numberkey = ["+" , "=" , ")" , "(" , "*" , "&" , "%" , "#" , "!" , "^" , "$" , "A" , "B" , "C" , "D" , "E" , "F" , "G" , "H" , "I" , "J" , "K" , "L" , "M" , "N" , "O" , "P" , "Q" , "R" , "S" , "T" , "U" , "V", "W" , "X" , "Y", "Z" , "a" , "b" , "c" , "d" , "e" , "f" , "g" , "h" , "i" ,"j" ,"k" , "l" ,"m" ,"n" , "o" , "p" , "q" , "r" , "s" , "t" ,"u" , "v","w" , "x","y","z", "-" , "=" , "/" , "+" , "." , "," , "[" , "]" , "{" , "}" , "'" , ";" , "_" , "`" , "!" , "@" , "#" , "$" , "%" , "^" , "&" , "(" , ")" , ":" , ">" , "<" , "?" , "|" ,"\"" , "`" , "~" ] 
+
   const [show, setShow] = useState(false);
 
   const showpassword = () => {
@@ -123,9 +125,9 @@ const Register = () => {
                   <div className="d-flex flex-row align-items-center mb-4 ">
                     <MDBIcon fas icon="user me-3" size="lg" />
                     <MDBInput 
-                  //   onKeyDown={(e) =>
-                  //   downkey.includes(e.key) && e.preventDefault()
-                  // }
+                    onKeyDown={(e) =>
+                    numberkey.includes(e.key) && e.preventDefault()
+                  }
                       placeholder="Your Phone No"
                       id="form1"
                       name="number"

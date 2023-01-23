@@ -117,8 +117,12 @@ router.get("/get", async (req,res)=>{
     }   
 })
 
-router.patch("/update/:id", multer.any(), async(req,res)=>{
-    try {  
+router.patch("/update/:id", uploadImage ,async(req,res)=>{
+    try {
+        const { name , email , number} = req.body;
+        if(!name || !email || !number || name == "" || email == ""|| number == ""){
+            return res.status(400).json("Please Enter All the details")
+        }
         const updateduser = await User.updateOne({_id:req.params.id}, {$set: req.body});
         res.status(200).json(updateduser);
     } catch (error) {
@@ -182,18 +186,40 @@ router.get('/read-book/:id',(req, res) => {
     });
 });
 
-router.put('/update-book/:id',(req, res, next) => {
-    Book.findByIdAndUpdate(req.params.id, {
-        $set: req.body
-    }, (error, data) => {
-        if (error) {
-            return next(error);
-        } else {
-            res.json(data)
-            console.log('Book updated successfully !!');
+// router.patch('/update-book/:id',(req, res, next) => {
+//     try{
+//         const { name , author ,price , quantity , description} = req.body;
+//         if(!name || !author || !price || !quantity || !description || name =="" || author == ""||price == "",quantity==""||description==""){
+//             return res.status(400).json("Please fill all the details")
+//         }
+//         Book.findByIdAndUpdate(req.params.id, {
+//             $set: req.body
+//         }, (error, data) => {
+//             if (error) {
+//                 return next(error);
+//             } else {
+//                 res.json(data)
+//             // console.log('Book updated successfully !!');
+//         }
+//     })
+// }catch(err){
+//     return res.status(200).json("Operation Failed")
+// }
+// })
+
+
+router.patch("/update-book/:id", uploadImage ,async(req,res)=>{
+    try {
+        const { name , author , price , quantity , description} = req.body;
+        if(!name || !price ||!quantity ||!description || name == "" || price == ""|| description == "" || quantity=="" || author ==""){
+            return res.status(400).json("Please Enter All the details")
         }
-    })
-})
+        const updatedBook = await Book.updateOne({_id:req.params.id}, {$set: req.body});
+        res.status(200).json(updatedBook);
+    } catch (error) {
+        res.status(400).json({message: error.message});
+    }
+});
 
 router.delete('/delete-book/:id',(req, res, next) => {
     Book.findByIdAndRemove(req.params.id,  (error, data) => {
