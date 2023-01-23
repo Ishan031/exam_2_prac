@@ -82,6 +82,7 @@ const Login = () => {
                   placeholder="Email address"
                   id="form1"
                   name="email"
+                  style={{opacity:0.7}}
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   type="email"
@@ -91,6 +92,7 @@ const Login = () => {
                   placeholder="Password"
                   id="form2"
                   name="password"
+                  style={{opacity:0.7}}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   type="password"

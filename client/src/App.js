@@ -10,7 +10,6 @@ import Edit from './components/Users/Edit';
 import Register from './components/Users/useForm';
 import ViewBooks from './components/Users/ViewBooks';
 import Editbook from './components/Users/EditBook';
-import ProfilePhoto from './components/Users/ProfilePhoto';
 
 function App() {
   return (
@@ -28,8 +27,6 @@ function App() {
         <Route path="/addbook" element = {<Signup/>} />
         <Route path="/viewbook" element = {<ViewBooks/>} />
         <Route path="/update-book/:id" element = {<Editbook/>} />
-        {/* <Route path="/profile" element = {<ProfilePhoto/>} /> */}
-
       </Routes> 
     </BrowserRouter> 
     </>

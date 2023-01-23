@@ -4,6 +4,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { red } from "@mui/material/colors";
 import { NavLink } from "react-router-dom";
 import { Card, Button } from "react-bootstrap";
+import { fontStyle } from "@mui/system";
 
 const Edit = () => {
   let formdata = new FormData();
@@ -15,6 +16,16 @@ const Edit = () => {
   const [number,setNumber] = useState();
   const [file, setFile] = useState("");
   
+  useEffect(() => {
+    loginverfy();
+  }, []);
+
+  const loginverfy = () => {
+    if (!localStorage.getItem("token")) {
+      history("/login");
+    }
+  };
+
   useEffect(() => {
     getUserById();
   }, []);
@@ -54,17 +65,31 @@ const Edit = () => {
   const downkey = ["*", "-" , "=" , "/" , "+" , "." , "," , "[" , "]" , "{" , "}" , "'" , ";" , "_" , "`" , "!" , "@" , "#" , "$" , "%" , "^" , "&" , "(" , ")" , ":" , ">" , "<" , "?" , "|" ,"\""];
   return (
     <>
-      <Card style={{ width: "30rem", height: "18rem", margin: "10rem" }}>
+    <div class="area" >
+            <ul class="circles">
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+            </ul>
+      <Card  id="cardback" style={{ width: "0rem", marginLeft:"450px" , paddingTop:"200px" , opacity:"0.6"}}>
         <Card.Body>
-      <div className="columns mt-5" style={{ backgroundColor: red}}>
+      <div style={{ backgroundColor: red}}>
         <div className="column is-half">
           <form onSubmit={updateUser}>
-            <div className="field" style={{ marginLeft: 90 , marginTop:-50 }}>
-              <label className="label">Name</label>
+            <div className="field" style={{ marginLeft: 90 }}>
+              <label className="label" style={{fontWeight:800 , color:"black"}}>Name:</label>
               <div className="control">
                 <input onKeyDown={(e) =>
                     downkey.includes(e.key) && e.preventDefault()
                   }
+                  style={{borderRadius:9 , paddingLeft:6}}
                   type="text"
                   className="input"
                   value={name}
@@ -74,9 +99,10 @@ const Edit = () => {
               </div>
             </div>
             <div className="field" style={{ marginLeft: 90 , marginTop:10}}>
-              <label className="label">Email</label>
+              <label className="label" style={{fontWeight:800 , color:"black"}}>Email:</label>
               <div className="control">
                 <input
+                style={{borderRadius:9 , paddingLeft:6}}
                   type="text"
                   className="input"
                   value={email}
@@ -86,9 +112,10 @@ const Edit = () => {
               </div>
             </div>
             <div className="field" style={{ marginLeft: 90 , marginTop:1}}>
-              <label className="label">Number</label>
+              <label className="label" style={{fontWeight:800 , color:"black"}}>Number:</label>
               <div className="control">
                 <input
+                style={{borderRadius:9 , paddingLeft:6}}
                   type="text"
                   className="input"
                   value={number}
@@ -102,7 +129,7 @@ const Edit = () => {
                 <button
                   type="submit"
                   className="btn btn-warning mt-3"
-                  style={{ marginLeft: 160 }}
+                  style={{ marginLeft: 160 , borderRadius:15}}
                 >
                   Update
                 </button>
@@ -113,6 +140,7 @@ const Edit = () => {
       </div>
       </Card.Body>
       </Card>
+      </div >
     </>
   );
 };

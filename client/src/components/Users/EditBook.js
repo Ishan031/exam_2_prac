@@ -18,19 +18,15 @@ const Editbook = () => {
     getUserById();
   }, []);
 
-  //image upload
-  // const fileChange=(e)=>
-  // {
-  //   setImage(URL.createObjectURL(e.target.files[0]))
-  //   console.log(e.target.files[0]);
-  // }
-  // localStorage.setItem("image",image)
-  // let formData = new FormData();
+  useEffect(() => {
+    loginverfy();
+  }, []);
 
-//   const handleImg = (e) => {
-//     setimg(e.target.files[0]);
-//     console.log(e.target.files);
-//   };
+  const loginverfy = () => {
+    if (!localStorage.getItem("token")) {
+      history("/login");
+    }
+  };
 
     const getUserById = async () => {
     const response = await axios.get(`http://localhost:2000/read-book/${id}`);
@@ -67,15 +63,29 @@ const Editbook = () => {
 
   return (
     <>
-      <Card style={{ width: "30rem", height: "25rem", margin: "9rem" }}>
+        <div class="area" >
+            <ul class="circles">
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+            </ul>
+      <Card  id="cardback2" style={{ width: "0rem", marginLeft:"450px" , paddingTop:"90px" , opacity:"0.6"}}>
         <Card.Body>
-      <div className="columns mt-5" style={{ backgroundColor: red}}>
+      <div style={{ backgroundColor: red}}> 
         <div className="column is-half">
           <form  onSubmit={updateUser} > 
-            <div className="field" style={{ marginLeft: 90 , marginTop:-50 }}>
-              <label className="label">Name</label>
+            <div className="field" style={{ marginLeft: 90 }}>
+              <label className="label" style={{fontWeight:800 , color:"black"}}>Name:</label>
               <div className="control">
                 <input
+                 style={{borderRadius:9 , paddingLeft:6}}
                   type="text"
                   className="input"
                   onKeyDown={(e) =>
@@ -88,9 +98,10 @@ const Editbook = () => {
               </div>
             </div>
             <div className="field" style={{ marginLeft: 90 , marginTop:10}}>
-              <label className="label">Author</label>
+              <label className="label" style={{fontWeight:800 , color:"black"}}>Author:</label>
               <div className="control">
                 <input
+                 style={{borderRadius:9 , paddingLeft:6}}
                   type="text"
                   className="input"
                   value={author}
@@ -100,9 +111,10 @@ const Editbook = () => {
               </div>
             </div>
             <div className="field" style={{ marginLeft: 90 , marginTop:1}}>
-              <label className="label">Price</label>
+              <label className="label" style={{fontWeight:800 , color:"black"}}>Price:</label>
               <div className="control">
                 <input
+                 style={{borderRadius:9 , paddingLeft:6}}
                   type="number"
                   className="input"
                   value={price}
@@ -112,9 +124,10 @@ const Editbook = () => {
               </div>
             </div>
               <div className="field" style={{ marginLeft: 90 , marginTop:1}}>
-              <label className="label">Quantity</label>
+              <label className="label"style={{fontWeight:800 , color:"black"}}>Quantity:</label>
               <div className="control">
                 <input
+                 style={{borderRadius:9 , paddingLeft:6}}
                   type="text"
                   className="input"
                   value={quantity}
@@ -124,9 +137,10 @@ const Editbook = () => {
               </div>
             </div>
             <div className="field" style={{ marginLeft: 90 , marginTop:1}}>
-              <label className="label">Description</label>
+              <label className="label"style={{fontWeight:800 , color:"black"}}>Description:</label>
               <div className="control">
                 <input
+                 style={{borderRadius:9 , paddingLeft:6}}
                   type="text"
                   className="input"
                   value={description}
@@ -138,10 +152,9 @@ const Editbook = () => {
             <div className="field">
               <div className="control">
                 <button
-                  type="submit"
+                  type="submit" 
                   className="btn btn-warning mt-3"
-                  style={{ marginLeft: 160 }}
-                 
+                  style={{ marginLeft: 160, borderRadius:15}}
                 >
                   Update
                 </button>
@@ -152,6 +165,7 @@ const Editbook = () => {
       </div>
       </Card.Body>
       </Card>
+      </div>
     </>
   );
 };
