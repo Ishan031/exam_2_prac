@@ -40,7 +40,7 @@ const Home = () => {
               </a>
               <ul className="js-clone-nav ml-0 pl-0 d-none d-lg-inline-block site-menu mx-auto text-center">
                 <li className="active">
-                  <a href="/#home-section" className="nav-link">
+                  <a href="/home" className="nav-link">
                     Home
                   </a>
                 </li>
