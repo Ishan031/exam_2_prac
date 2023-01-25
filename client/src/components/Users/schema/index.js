@@ -2,6 +2,7 @@ import * as Yup from "yup";
 
 export const formSchema = Yup.object({
   name: Yup.string().min(3).max(25).required("Enter Your Name"),
+  username : Yup.string().min(3).max(25).required("Enter Your Username"),
   number: Yup.string()
     .min(10, "Number Must be 10 digit")
     .max(12, "Alowd only 10 digit Number")
@@ -10,7 +11,7 @@ export const formSchema = Yup.object({
     .email("Invalid email format")
     .required("Enter Your Email"),
   password: Yup.string()
-    .min(8, "Please Use Stong Password")
+    .min(8, "Please Use Strong Password")
     .max(16)
     .matches(
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,

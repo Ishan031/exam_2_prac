@@ -41,7 +41,7 @@ const Login = () => {
         toast.success("Login Successfull");
         // console.log(res);
         setTimeout(() => {
-          history("/about");
+          history("/viewbook");
         }, 2000);
       }
     } catch (err) {

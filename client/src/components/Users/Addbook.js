@@ -15,6 +15,7 @@ import {
 } from "mdb-react-ui-kit";
 // import { formSchema } from './schema/index';
 import { useEffect } from "react";
+import { Button } from "react-bootstrap";
 
 const Signup = () => {
   const history = useNavigate();
@@ -78,7 +79,7 @@ const Signup = () => {
       }
     } catch (error) {
       console.log("error");
-      window.alert("failed");
+      window.alert("Please Fill all the details");
     }
   };
 
@@ -133,7 +134,7 @@ const Signup = () => {
                     name="price"
                     value={user.price}
                     onChange={handleInputs}
-                    type="password"
+                    type="Number"
                   />
                 </div>
 
@@ -144,7 +145,7 @@ const Signup = () => {
                     name="quantity"
                     value={user.quantity}
                     onChange={handleInputs}
-                    type="password"
+                    type="Number"
                   />
                 </div>
 
@@ -162,14 +163,14 @@ const Signup = () => {
                     <input type="file" name="photo" 
                     onChange={onInputChange}/>
                   </div>
-                <MDBBtn
+                <Button
                   className="mb-5"
                   size="lg"
                   id="signup"
                   onClick={postData}
                 >
                   Register
-                </MDBBtn>
+                </Button>
               </MDBCol>
               <MDBCol
                 md="10"

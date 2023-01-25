@@ -35,6 +35,7 @@ const Register = () => {
   const { values, errors, handleBlur, handleChange, handleSubmit } = useFormik({
     initialValues: {
       name: "",
+      username : "",
       email: "",
       number : "",
       password: "",
@@ -45,6 +46,7 @@ const Register = () => {
     onSubmit: async (values, actions) => {
         let formdata = new FormData()
   formdata.append('name',values.name)
+  formdata.append('username',values.username)
   formdata.append('email',values.email)
   formdata.append('number',values.number)
   formdata.append('password',values.password)
@@ -121,7 +123,20 @@ const Register = () => {
                     />
                   </div>
                   {errors.name && <p className="error">{errors.name}</p>}
-
+                  <div className="d-flex flex-row align-items-center mb-4 ">
+                    <MDBIcon fas icon="user me-3" size="lg" />
+                    <MDBInput
+                      placeholder="Your username"
+                      id="form1"
+                      name="username"
+                      value={values.username}
+                      onBlur={handleBlur}
+                      onChange={handleChange}
+                      type="text"
+                      className={errors.username ? "input-error" : ""}
+                    />
+                  </div>
+                  {errors.username && <p className="error">{errors.username}</p>}
                   <div className="d-flex flex-row align-items-center mb-4 ">
                     <MDBIcon fas icon="user me-3" size="lg" />
                     <MDBInput 

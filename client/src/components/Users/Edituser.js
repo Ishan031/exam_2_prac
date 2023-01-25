@@ -58,7 +58,7 @@ const Edituser = () => {
       window.alert("User Updated Successfully");
     } catch (error) {
       console.log("Unsuccessfull");
-      window.alert("Operation Failed");
+      window.alert("Please Fill all the details");
     }
   };
 
@@ -247,11 +247,11 @@ const Edituser = () => {
                     <div className="control">
                       <input
                         style={{ borderRadius: 9, paddingLeft: 6 }}
-                        type="text"
+                        type="Number"
                         className="input"
                         value={age}
                         onChange={(e) => setAge(e.target.value)}
-                        placeholder="Number"
+                        placeholder="Age"
                       />
                     </div>
                   </div>

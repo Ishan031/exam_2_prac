@@ -46,12 +46,7 @@ const Home = () => {
                 </li>
                 <li>
                   <a href="/about" className="nav-link">
-                    About
-                  </a>
-                </li>
-                <li>
-                  <a href="/#services-section" className="nav-link">
-                    Login
+                    User List
                   </a>
                 </li>
                 <li>

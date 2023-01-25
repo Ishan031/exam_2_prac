@@ -68,12 +68,7 @@ const About = () => {
             </li>
             <li>
               <a href="/about" className="nav-link">
-                About
-              </a>
-            </li>
-            <li>
-              <a href="/login" className="nav-link">
-                Login
+                User List
               </a>
             </li>
             <li>

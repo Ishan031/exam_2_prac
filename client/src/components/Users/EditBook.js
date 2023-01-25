@@ -55,7 +55,7 @@ const Editbook = () => {
       window.alert("Book Updated Successfully");
     } catch (error) {
       console.log("Unsuccessfull");
-      window.alert("Operation Failed");
+      window.alert("Please Fill all the details");
     }
   };
 
@@ -206,11 +206,11 @@ const Editbook = () => {
                     <div className="control">
                       <input
                         style={{ borderRadius: 9, paddingLeft: 6 }}
-                        type="text"
+                        type="Number"
                         className="input"
                         value={quantity}
                         onChange={(e) => setQuantity(e.target.value)}
-                        placeholder="Number"
+                        placeholder="Quantity"
                       />
                     </div>
                   </div>
@@ -231,7 +231,7 @@ const Editbook = () => {
                         className="input"
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
-                        placeholder="Number"
+                        placeholder="Description"
                       />
                     </div>
                   </div>
