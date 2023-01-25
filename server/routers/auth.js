@@ -296,7 +296,6 @@ router.delete('/delete-book/:id',(req, res, next) => {
     })
 })
 
-router.post('/upload', uploadImage , upload);
 
 
 

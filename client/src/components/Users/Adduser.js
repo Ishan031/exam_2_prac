@@ -84,8 +84,8 @@ const Adduser = () => {
 
   return (
     <div>
-            <MDBContainer fluid>
-        <MDBCard className="text-black m-5" style={{ borderRadius: "25px" }}>
+        <MDBContainer fluid>
+        <MDBCard className="text-black m-5" style={{ borderRadius: "25px"}}>
           <MDBCardBody>
             <MDBRow>
               <MDBCol
@@ -176,7 +176,8 @@ const Adduser = () => {
                 className="order-1 order-lg-2 d-flex align-items-center"
               >
                 <MDBCardImage
-                  src="https://media.istockphoto.com/id/949118068/photo/books.jpg?s=612x612&w=0&k=20&c=1vbRHaA_aOl9tLIy6P2UANqQ27KQ_gSF-BH0sUjQ730="
+                style={{height:500 , marginBottom:500}}
+                  src="https://previews.123rf.com/images/kapley/kapley0901/kapley090100028/4183913-abstract-white-background-with-elements-of-design-in-the-form-of-the-bent-blue-lines.jpg"
                   fluid
                 />
               </MDBCol>
