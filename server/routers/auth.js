@@ -47,6 +47,10 @@ router.post('/register', uploadImage,async(req,res)=>{
 })
 
 router.post('/add-user', multer.any(),(req, res, next) => {
+    const { firstname , lastname ,gender , age , address} = req.body;
+    if (!firstname || !lastname ||!gender ||!age ||!address || firstname == "" || lastname == "" || gender == "" || age == "" || address == ""){
+        return res.status(404).json({error:" Please enter all the details "});
+    }
     userprofile.create(req.body, (error, data) => {
         if (error) {
             return next(error);
@@ -87,6 +91,10 @@ router.get('/read-user/:id', (req, res, next) => {
 });
 
 router.put('/update-user/:id', (req, res, next) => {
+    const { firstname , lastname ,gender , age , address} = req.body;
+    if (!firstname || !lastname ||!gender ||!age ||!address || firstname == "" || lastname == "" || gender == "" || age == "" || address == ""){
+        return res.status(404).json({error:" Please enter all the details "});
+    }
     userprofile.findByIdAndUpdate(req.params.id, {
         $set: req.body
     }, (error, data) => {

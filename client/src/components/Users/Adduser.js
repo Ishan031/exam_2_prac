@@ -53,6 +53,7 @@ const Adduser = () => {
 
     setUser({ ...user, [name]: value });
   };
+  console.log(user);
   
   const postData = async (e) => {
     const { firstname, lastname, gender, age ,address} = user;
@@ -62,6 +63,7 @@ const Adduser = () => {
     formdata.append('gender',user.gender)
     formdata.append('age',user.age)
     formdata.append('address' , user.address)
+    console.log(user);
     // formdata.append('photo' , file)
     e.preventDefault();
     try {
@@ -118,7 +120,7 @@ const Adduser = () => {
                   />
                 </div>
 
-                <div className="d-flex flex-row align-items-center mb-4">
+                {/* <div className="d-flex flex-row align-items-center mb-4">
                   <MDBInput
                     label="gender"
                     id="form3"
@@ -127,8 +129,17 @@ const Adduser = () => {
                     onChange={handleInputs}
                     type="radiobutton"
                   />
-                </div>
-
+                </div> */}
+         <div className="form-group">
+        <div style={{marginRight:220}}>Gender:</div>
+        <div className="form-check form-check-inline" value={user.gender} onChange={handleInputs}>
+          <input type="radio" className="form-check-input" defaultValue="male" id="male" name="gender" formcontrolname="gender" />
+          <label className="form-check-label" htmlFor="male">Male</label><br />
+          <input type="radio" className="form-check-input" defaultValue="female" id="female" name="gender" formcontrolname="gender"  />
+          <label className="form-check-label" htmlFor="male">Female</label>
+        </div>
+        </div>
+        
                 <div className="d-flex flex-row align-items-center mb-4">
                   <MDBInput
                     label="Age"
@@ -136,7 +147,7 @@ const Adduser = () => {
                     name="age"
                     value={user.age}
                     onChange={handleInputs}
-                    type="password"
+                    type="number"
                   />
                 </div>
 

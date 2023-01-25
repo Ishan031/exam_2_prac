@@ -30,10 +30,6 @@ const About = () => {
   };
   }
 
-  const getImage = async () =>{
-    const response = await axios.get
-  }
-
   const deleteUser = async (id) => {
     try {
       await axios.delete(`http://localhost:2000/delete-user/${id}`);
