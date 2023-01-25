@@ -10,6 +10,8 @@ import Edit from './components/Users/Edit';
 import Register from './components/Users/useForm';
 import ViewBooks from './components/Users/ViewBooks';
 import Editbook from './components/Users/EditBook';
+import Adduser from './components/Users/Adduser';
+import Edituser from './components/Users/Edituser';
 
 function App() {
   return (
@@ -27,10 +29,11 @@ function App() {
         <Route path="/addbook" element = {<Signup/>} />
         <Route path="/viewbook" element = {<ViewBooks/>} />
         <Route path="/update-book/:id" element = {<Editbook/>} />
+        <Route path="/add" element = {<Adduser/>} />
+        <Route path="/update-user/:id" element = {<Edituser/>} /> 
       </Routes> 
     </BrowserRouter> 
     </>
-    
   );
 }
 

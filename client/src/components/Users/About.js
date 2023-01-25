@@ -19,10 +19,8 @@ const About = () => {
     const getcookie = cookies.get("jwtoken");
     // console.log(getcookie);
     if(getcookie){
-      const response = await axios.get("http://localhost:2000/get");
+      const response = await axios.get("http://localhost:2000/getusers");
       console.log(response);
-      const img = localStorage.getItem("image");
-      // console.log(img);
       setUser(response.data);
     // setUser(img)
       // console.log(users);
@@ -38,7 +36,7 @@ const About = () => {
 
   const deleteUser = async (id) => {
     try {
-      await axios.delete(`http://localhost:2000/delete/${id}`);
+      await axios.delete(`http://localhost:2000/delete-user/${id}`);
       getUsers();
       window.alert("User Deleted Successfully");
     } catch (error) {
@@ -88,11 +86,6 @@ const About = () => {
               </a>
             </li>
             <li>
-              <a href="/contact" className="nav-link">
-                Contact
-              </a>
-            </li>
-            <li>
               <a href="/addbook" className="nav-link">
                 ADD BOOKS
               </a>
@@ -123,7 +116,7 @@ const About = () => {
   <body>  
       <div className="columns mt-5">
         <div className="column is-half">
-          <Link to="/register" className="button is-success">
+          <Link to="/add" className="button is-success">
             <button className="btn btn-primary" style={{marginTop:50}}>Add New</button>
           </Link>
           </div>
@@ -132,24 +125,26 @@ const About = () => {
             <thead>
               <tr>
                 <th>ID</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Number</th>
-                <th>Profile pic</th>
-                <th>actions</th>
+                <th>FirstName</th>
+                <th>LastName</th>
+                <th>Gender</th>
+                <th>Age</th>
+                <th>Address</th>
               </tr>
             </thead>
             <tbody>
               {users.map((user, index) => (
                 <tr key={user._id}>
                   <td>{index + 1}</td>  
-                  <td>{user.name}</td>
-                  <td>{user.email}</td>
-                  <td>{user.number}</td>
-                  <td><img src={user.image} style={{height:90}} /></td>
+                  <td>{user.firstname}</td>
+                  <td>{user.lastname}</td>
+                  <td>{user.gender}</td>
+                  <td>{user.age}</td>
+                  <td>{user.address}</td>
+                  {/* <td><img src={user.image} style={{height:90}} /></td> */}
                   <td>
                     <Link
-                      to={`/update/${user._id}`}
+                      to={`/update-user/${user._id}`}
                       className="btn btn-success"
                       style={{ marginRight: 20 }}
                     >

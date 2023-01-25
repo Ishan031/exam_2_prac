@@ -5,105 +5,108 @@ import { red } from "@mui/material/colors";
 import { NavLink } from "react-router-dom";
 import { Card, Button } from "react-bootstrap";
 
-const Editbook = () => {
+const Edituser = () => {
   const { id } = useParams();
   const history = useNavigate();
-  const [name, setName] = useState();
-  const [author, setAuthor] = useState();
-  const [price, setPrice] = useState();
-  const [quantity, setQuantity] = useState();
-  const [description, setDescription] = useState();
+  const [firstname, setFirstname] = useState();
+  const [lastname, setLastname] = useState();
+  const [gender, setGender] = useState();
+  const [age, setAge] = useState();
+  const [address, setAddress] = useState();
 
-  useEffect(() => {
-    getUserById();
-  }, []);
+    useEffect(() => {
+        loginverfy();
+      }, []);
+    
+      const loginverfy = () => {
+        if (!localStorage.getItem("token")) {
+          history("/login");
+        }
+      };
+    
+      useEffect(() => {
+        getUserBy();
+      }, []);
 
-  useEffect(() => {
-    loginverfy();
-  }, []);
+      const getUserBy = async () => {
+        const response = await axios.get(`http://localhost:2000/read-user/${id}`);
+        setFirstname(response.data.firstname);
+        setLastname(response.data.lastname);
+        setGender(response.data.gender);
+        setAge(response.data.age);
+        setAddress(response.data.address);
+        // setFile(response.data.image);
+        console.log(response);        
+      };
+      const updateUser = async (e) => {
+        // formdata.append('firstname', firstname )  
+        // formdata.append('lastname', lastname )
+        // formdata.append('gender',gender)
+        // formdata.append('age', age )
+        // formdata.append('address',address )
+        // console.log(formdata);
+        e.preventDefault();
+        try {
+          await axios.put(`http://localhost:2000/update-user/${id}`,{
+            firstname,
+            lastname,
+            gender,
+            age,
+            address
+          });
+          history("/about");
+          window.alert("User Updated Successfully");
+        } catch (error) {
+          console.log("Unsuccessfull");
+          window.alert("Operation Failed");
+        }
+      };
 
-  const loginverfy = () => {
-    if (!localStorage.getItem("token")) {
-      history("/login");
-    }
-  };
-
-  const getUserById = async () => {
-    const response = await axios.get(`http://localhost:2000/read-book/${id}`);
-    setName(response.data.name);
-    setAuthor(response.data.author);
-    setPrice(response.data.price);
-    setQuantity(response.data.quantity);
-    setDescription(response.data.description);
-    console.log(response);
-    // formData.append('name', name )
-    // formData.append('email', email )
-    // formData.append('image', image )
-    // console.log(formData);
-  };
-  const updateUser = async (e) => {
-    e.preventDefault();
-    try {
-      await axios.patch(`http://localhost:2000/update-book/${id}`, {
-        name,
-        author,
-        price,
-        quantity,
-        description,
-      });
-      history("/viewbook");
-      window.alert("Book Updated Successfully");
-    } catch (error) {
-      console.log("Unsuccessfull");
-      window.alert("Operation Failed");
-    }
-  };
-
-  const downkey = [
-    "0",
-    "1",
-    "2",
-    "3",
-    "4",
-    "5",
-    "6",
-    "7",
-    "8",
-    "9",
-    "*",
-    "-",
-    "=",
-    "/",
-    "+",
-    ".",
-    ",",
-    "[",
-    "]",
-    "{",
-    "}",
-    "'",
-    ";",
-    "_",
-    "`",
-    "!",
-    "@",
-    "#",
-    "$",
-    "%",
-    "^",
-    "&",
-    "(",
-    ")",
-    ":",
-    ">",
-    "<",
-    "?",
-    "|",
-    '"',
-  ];
+      const downkey = [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "*",
+        "-",
+        "=",
+        "/",
+        "+",
+        ".",
+        ",",
+        "[",
+        "]",
+        "{",
+        "}",
+        "'",
+        ";",
+        "_",
+        "`",
+        "!",
+        "@",
+        "#",
+        "$",
+        "%",
+        "^",
+        "&",
+        "(",
+        ")",
+        ":",
+        ">",
+        "<",
+        "?",
+        "|",
+        '"',
+      ];
 
   return (
-    <>
+    <div>
       <div class="area">
         <ul class="circles">
           <li></li>
@@ -135,7 +138,7 @@ const Editbook = () => {
                       className="label"
                       style={{ fontWeight: 800, color: "black" }}
                     >
-                      Name:
+                      FirstName:
                     </label>
                     <div className="control">
                       <input
@@ -144,9 +147,9 @@ const Editbook = () => {
                         className="input"
                         onKeyDown={(e) =>
                           downkey.includes(e.key) && e.preventDefault()
-                        }
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
+                        }   
+                        value={firstname}
+                        onChange={(e) => setFirstname(e.target.value)}
                         placeholder="Name"
                       />
                     </div>
@@ -159,15 +162,15 @@ const Editbook = () => {
                       className="label"
                       style={{ fontWeight: 800, color: "black" }}
                     >
-                      Author:
+                      LastName:
                     </label>
                     <div className="control">
                       <input
                         style={{ borderRadius: 9, paddingLeft: 6 }}
                         type="text"
                         className="input"
-                        value={author}
-                        onChange={(e) => setAuthor(e.target.value)}
+                        value={lastname}
+                        onChange={(e) => setLastname(e.target.value)}
                         placeholder="Email"
                       />
                     </div>
@@ -180,15 +183,15 @@ const Editbook = () => {
                       className="label"
                       style={{ fontWeight: 800, color: "black" }}
                     >
-                      Price:
+                      Gender:
                     </label>
                     <div className="control">
                       <input
                         style={{ borderRadius: 9, paddingLeft: 6 }}
-                        type="number"
+                        type="text"
                         className="input"
-                        value={price}
-                        onChange={(e) => setPrice(e.target.value)}
+                        value={gender}
+                        onChange={(e) => setGender(e.target.value)}
                         placeholder="Price"
                       />
                     </div>
@@ -201,15 +204,15 @@ const Editbook = () => {
                       className="label"
                       style={{ fontWeight: 800, color: "black" }}
                     >
-                      Quantity:
+                      Age:
                     </label>
                     <div className="control">
                       <input
                         style={{ borderRadius: 9, paddingLeft: 6 }}
                         type="text"
                         className="input"
-                        value={quantity}
-                        onChange={(e) => setQuantity(e.target.value)}
+                        value={age}
+                        onChange={(e) => setAge(e.target.value)}
                         placeholder="Number"
                       />
                     </div>
@@ -222,15 +225,15 @@ const Editbook = () => {
                       className="label"
                       style={{ fontWeight: 800, color: "black" }}
                     >
-                      Description:
+                      Address:
                     </label>
                     <div className="control">
                       <input
                         style={{ borderRadius: 9, paddingLeft: 6 }}
                         type="text"
                         className="input"
-                        value={description}
-                        onChange={(e) => setDescription(e.target.value)}
+                        value={address}
+                        onChange={(e) => setAddress(e.target.value)}
                         placeholder="Number"
                       />
                     </div>
@@ -252,8 +255,8 @@ const Editbook = () => {
           </Card.Body>
         </Card>
       </div>
-    </>
-  );
-};
+    </div>
+  )
+}
 
-export default Editbook;
+export default Edituser

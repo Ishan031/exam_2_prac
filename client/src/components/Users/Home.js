@@ -60,11 +60,6 @@ const Home = () => {
                   </a>
                 </li>
                 <li>
-                  <a href="/contact" className="nav-link">
-                    Contact
-                  </a>
-                </li>
-                <li>
                   <a href="/addbook" className="nav-link">
                     ADD BOOKS
                   </a>

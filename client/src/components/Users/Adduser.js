@@ -13,17 +13,19 @@ import {
   MDBInput,
   MDBIcon,
 } from "mdb-react-ui-kit";
+import { Button } from "react-bootstrap";
 // import { formSchema } from './schema/index';
 import { useEffect } from "react";
 
-const Signup = () => {
+const Adduser = () => {
+
   const history = useNavigate();
   const [user, setUser] = useState({
-    name: "",
-    author: "",
-    price: "",
-    quantity: "",
-    description : "",
+    firstname: "",
+    lastname: "",
+    gender: "",
+    age: "",
+    address : "",
   });
 
   useEffect(() => {
@@ -53,44 +55,34 @@ const Signup = () => {
   };
   
   const postData = async (e) => {
-    const { name, author, price, quantity , description } = user;
+    const { firstname, lastname, gender, age ,address} = user;
     let formdata = new FormData()
-    formdata.append('name',user.name)
-    formdata.append('author',user.author)
-    formdata.append('price',user.price)
-    formdata.append('quantity',user.quantity)
-    formdata.append('description' , user.description)
-    formdata.append('photo' , file)
+    formdata.append('firstname',user.firstname)
+    formdata.append('lastname',user.lastname)
+    formdata.append('gender',user.gender)
+    formdata.append('age',user.age)
+    formdata.append('address' , user.address)
+    // formdata.append('photo' , file)
     e.preventDefault();
     try {
       const res = await axios.post(
-        "http://localhost:2000/add-book",formdata
+        "http://localhost:2000/add-user",formdata
       );
       // console.log(res);
+      window.alert("Registeration Successfull");
+      console.log("Registeration Successfull");
+      history("/about");
 
-      if (res.status === 422 || !res) {
-        window.alert("Registeration Failed");
-        console.log("Registeration Failed");
-      } else {
-        window.alert("Registeration Successfull");
-        console.log("Registeration Successfull");
-        history("/viewbook");
-      }
     } catch (error) {
       console.log("error");
       window.alert("failed");
     }
   };
 
-  // const imageUpload = (event) =>{
-  //   // console.log(event.target.files);
-  //   setUser({...user,image: event.target.files[0]})
-  // }
-
 
   return (
     <div>
-      <MDBContainer fluid>
+            <MDBContainer fluid>
         <MDBCard className="text-black m-5" style={{ borderRadius: "25px" }}>
           <MDBCardBody>
             <MDBRow>
@@ -100,15 +92,15 @@ const Signup = () => {
                 className="order-2 order-lg-1 d-flex flex-column align-items-center"
               >
                 <p classNAme="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">
-                  ADD BOOK
+                  ADD USER
                 </p>
 
                 <div className="d-flex flex-row align-items-center mb-4 ">
                   <MDBInput
-                    label="Book Name"
+                    label="firstname"
                     id="form1"
-                    name="name"
-                    value={user.name}
+                    name="firstname"
+                    value={user.firstname}
                     onChange={handleInputs}
                     type="text"
                     className="w-100"
@@ -117,10 +109,10 @@ const Signup = () => {
 
                 <div className="d-flex flex-row align-items-center mb-4">
                   <MDBInput
-                    label="Author"
+                    label="lastname"
                     id="form2"
-                    name="author"
-                    value={user.author}
+                    name="lastname"
+                    value={user.lastname}
                     onChange={handleInputs}
                     type="email"
                   />
@@ -128,10 +120,21 @@ const Signup = () => {
 
                 <div className="d-flex flex-row align-items-center mb-4">
                   <MDBInput
-                    label="Price"
+                    label="gender"
                     id="form3"
-                    name="price"
-                    value={user.price}
+                    name="gender"
+                    value={user.gender}
+                    onChange={handleInputs}
+                    type="radiobutton"
+                  />
+                </div>
+
+                <div className="d-flex flex-row align-items-center mb-4">
+                  <MDBInput
+                    label="Age"
+                    id="form4"
+                    name="age"
+                    value={user.age}
                     onChange={handleInputs}
                     type="password"
                   />
@@ -139,37 +142,22 @@ const Signup = () => {
 
                 <div className="d-flex flex-row align-items-center mb-4">
                   <MDBInput
-                    label="Quantity"
+                    label="Address"
                     id="form4"
-                    name="quantity"
-                    value={user.quantity}
-                    onChange={handleInputs}
-                    type="password"
-                  />
-                </div>
-
-                <div className="d-flex flex-row align-items-center mb-4">
-                  <MDBInput
-                    label="Description"
-                    id="form4"
-                    name="description"
-                    value={user.description}
+                    name="address"
+                    value={user.address}
                     onChange={handleInputs}
                     type="text"
                   />
                 </div>
-                <div>
-                    <input type="file" name="photo" 
-                    onChange={onInputChange}/>
-                  </div>
-                <MDBBtn
+                <Button variant="outline-primary"
                   className="mb-5"
                   size="lg"
                   id="signup"
                   onClick={postData}
                 >
                   Register
-                </MDBBtn>
+                </Button>
               </MDBCol>
               <MDBCol
                 md="10"
@@ -186,7 +174,7 @@ const Signup = () => {
         </MDBCard>
       </MDBContainer>
     </div>
-  );
-};
+  )
+}
 
-export default Signup;
+export default Adduser

@@ -27,11 +27,11 @@ const Register = () => {
   //   name : "" , email : "" , password : "" , cpassword : "" ,
   // })
   //  console.log(user);
-  const [file, setFile] = useState("");
-  const onInputChange = (e) =>{
-    setFile(e.target.files[0])
-    console.log(file);
-  }
+  // const [file, setFile] = useState("");
+  // const onInputChange = (e) =>{
+  //   setFile(e.target.files[0])
+  //   console.log(file);
+  // }
   const { values, errors, handleBlur, handleChange, handleSubmit } = useFormik({
     initialValues: {
       name: "",
@@ -49,7 +49,7 @@ const Register = () => {
   formdata.append('number',values.number)
   formdata.append('password',values.password)
   formdata.append('cpassword' , values.cpassword)
-  formdata.append('photo' , file)
+  // formdata.append('photo' , file)
       try {
         let url = "http://localhost:2000/register";
         await axios
@@ -92,7 +92,7 @@ const Register = () => {
   return (  
     <div>
       <MDBContainer fluid>
-        <form onSubmit={handleSubmit}>  
+        {/* <form onSubmit={handleSubmit}>   */}
           <MDBCard className="text-black m-5"  style={{ borderRadius: "25px" }}>
             <MDBCardBody>
               <MDBRow>
@@ -195,18 +195,19 @@ const Register = () => {
                   {errors.cpassword && (
                     <p className="errorcp">{errors.cpassword}</p>
                   )}
-                  <div>
+                  {/* <div>
                     <input type="file" name="photo" 
                     onChange={onInputChange}/>
-                  </div>
+                  </div> */}
                   <NavLink to="/login" className="mb-4">
                     Already a user?
                   </NavLink>
-                  <MDBBtn
+                  <Button
                   id="regbtn"
+                  onClick={handleSubmit}
                 >
                   Register
-                </MDBBtn>
+                </Button>
                   <ToastContainer
                     position="top-right"
                     autoClose={2000}
@@ -233,7 +234,7 @@ const Register = () => {
               </MDBRow>
             </MDBCardBody>
           </MDBCard>
-        </form>
+        {/* </form> */}
       </MDBContainer>
     </div>
   );

@@ -9,7 +9,6 @@ const router = require("./routers/auth");
 const bodyparser = require('body-parser');
 const userUpload = require('./routers/auth')
 
-
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded())
 app.use(cors());

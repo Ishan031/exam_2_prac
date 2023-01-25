@@ -8,6 +8,7 @@ require("dotenv").config();
 const multer = require("multer")();
 const file = require("../multer/multer");
 const cookie = require("cookie-parser");
+const userprofile = require("../models/userprofile")
 // const authenticate = require('../middleware/authenticate');
 require("../database/db")
 const {upload , uploadImage} = require('../controllers/userController');
@@ -18,22 +19,11 @@ router.get('/',(req,res)=>{
     res.send(`Hello from server`)
 })
 
-// const storage = multer.diskStorage({
-//     destination  : (req,file,cb) =>{
-//         cb(null, 'uploads');
-//     },
-//     filename : function (req, file , cb){
-//         cb(null,file.originalname)
-//     }
-// });
-
-// const upload = multer({storage: storage})
-
 router.post('/register', uploadImage,async(req,res)=>{
     
     const { name , email ,password , cpassword , number} = req.body;
-    const image = 'http://localhost:2000/'+req.file.filename;
-    console.log(image);
+    // const image = 'http://localhost:2000/'+req.file.filename;
+    // console.log(image);
     if (!name || !email ||!password ||!cpassword ||!number || name == "" || email == "" || password == "" || cpassword == ""){
         return res.status(404).json({error:" Please enter all the details "});
     }
@@ -46,7 +36,7 @@ router.post('/register', uploadImage,async(req,res)=>{
             } else if(password!=cpassword){
                  res.status(404).json({ message:"Passwords donot match" });
             }else{
-                const user = new User({ name,email,number,password,cpassword,image});
+                const user = new User({ name,email,number,password,cpassword});
                 res.status(200).json({message:"user registered successfully"});
                  user.save();
             }
@@ -54,6 +44,71 @@ router.post('/register', uploadImage,async(req,res)=>{
     }catch(err){
         console.log(err);
     }
+})
+
+router.post('/add-user', multer.any(),(req, res, next) => {
+    userprofile.create(req.body, (error, data) => {
+        if (error) {
+            return next(error);
+
+        } else {
+            const user = new userprofile({
+
+                firstname: req.body.firstname,
+                lastname: req.body.lastname,
+                gender: req.body.gender,
+                age: req.body.age,
+                address: req.body.address,
+            })
+            // user.save();
+            return res.json({ success: true, message: 'Added ' })
+        }
+    });
+});
+
+router.get('/getusers', (req, res) => {
+    userprofile.find((error, data) => {
+        if (error) {
+            return next(error);
+        } else {
+            res.json(data)
+        }
+    });
+});
+
+router.get('/read-user/:id', (req, res, next) => {
+    userprofile.findById(req.params.id, (error, data) => {
+        if (error) {
+            return next(error)
+        } else {
+            res.json(data)
+        }
+    });
+});
+
+router.put('/update-user/:id', (req, res, next) => {
+    userprofile.findByIdAndUpdate(req.params.id, {
+        $set: req.body
+    }, (error, data) => {
+        if (error) {
+            return next(error);
+        } else {
+            res.json(req.body)
+            console.log('user updated successfully !!');
+        }
+    })
+})
+
+router.delete('/delete-user/:id', (req, res, next) => {
+    userprofile.findByIdAndRemove(req.params.id, (error, data) => {
+        if (error) {
+            return next(error);
+        } else {
+            res.status(200).json({
+                msg: "user Deleted successfull"
+            })
+        }
+    })
 })
 
 router.post("/signin",  async(req,res)=>{
