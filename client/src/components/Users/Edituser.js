@@ -14,96 +14,96 @@ const Edituser = () => {
   const [age, setAge] = useState();
   const [address, setAddress] = useState();
 
-    useEffect(() => {
-        loginverfy();
-      }, []);
-    
-      const loginverfy = () => {
-        if (!localStorage.getItem("token")) {
-          history("/login");
-        }
-      };
-    
-      useEffect(() => {
-        getUserBy();
-      }, []);
+  useEffect(() => {
+    loginverfy();
+  }, []);
 
-      const getUserBy = async () => {
-        const response = await axios.get(`http://localhost:2000/read-user/${id}`);
-        setFirstname(response.data.firstname);
-        setLastname(response.data.lastname);
-        setGender(response.data.gender);
-        setAge(response.data.age);
-        setAddress(response.data.address);
-        // setFile(response.data.image);
-        console.log(response);        
-      };
-      const updateUser = async (e) => {
-        // formdata.append('firstname', firstname )  
-        // formdata.append('lastname', lastname )
-        // formdata.append('gender',gender)
-        // formdata.append('age', age )
-        // formdata.append('address',address )
-        // console.log(formdata);
-        e.preventDefault();
-        try {
-          await axios.put(`http://localhost:2000/update-user/${id}`,{
-            firstname,
-            lastname,
-            gender,
-            age,
-            address
-          });
-          history("/about");
-          window.alert("User Updated Successfully");
-        } catch (error) {
-          console.log("Unsuccessfull");
-          window.alert("Operation Failed");
-        }
-      };
+  const loginverfy = () => {
+    if (!localStorage.getItem("token")) {
+      history("/login");
+    }
+  };
 
-      const downkey = [
-        "0",
-        "1",
-        "2",
-        "3",
-        "4",
-        "5",
-        "6",
-        "7",
-        "8",
-        "9",
-        "*",
-        "-",
-        "=",
-        "/",
-        "+",
-        ".",
-        ",",
-        "[",
-        "]",
-        "{",
-        "}",
-        "'",
-        ";",
-        "_",
-        "`",
-        "!",
-        "@",
-        "#",
-        "$",
-        "%",
-        "^",
-        "&",
-        "(",
-        ")",
-        ":",
-        ">",
-        "<",
-        "?",
-        "|",
-        '"',
-      ];
+  useEffect(() => {
+    getUserBy();
+  }, []);
+
+  const getUserBy = async () => {
+    const response = await axios.get(`http://localhost:2000/read-user/${id}`);
+    setFirstname(response.data.firstname);
+    setLastname(response.data.lastname);
+    setGender(response.data.gender);
+    setAge(response.data.age);
+    setAddress(response.data.address);
+    // setFile(response.data.image);
+    console.log(response);
+  };
+  const updateUser = async (e) => {
+    // formdata.append('firstname', firstname )
+    // formdata.append('lastname', lastname )
+    // formdata.append('gender',gender)
+    // formdata.append('age', age )
+    // formdata.append('address',address )
+    // console.log(formdata);
+    e.preventDefault();
+    try {
+      await axios.put(`http://localhost:2000/update-user/${id}`, {
+        firstname,
+        lastname,
+        gender,
+        age,
+        address,
+      });
+      history("/about");
+      window.alert("User Updated Successfully");
+    } catch (error) {
+      console.log("Unsuccessfull");
+      window.alert("Operation Failed");
+    }
+  };
+
+  const downkey = [
+    "0",
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "*",
+    "-",
+    "=",
+    "/",
+    "+",
+    ".",
+    ",",
+    "[",
+    "]",
+    "{",
+    "}",
+    "'",
+    ";",
+    "_",
+    "`",
+    "!",
+    "@",
+    "#",
+    "$",
+    "%",
+    "^",
+    "&",
+    "(",
+    ")",
+    ":",
+    ">",
+    "<",
+    "?",
+    "|",
+    '"',
+  ];
 
   return (
     <div>
@@ -147,7 +147,7 @@ const Edituser = () => {
                         className="input"
                         onKeyDown={(e) =>
                           downkey.includes(e.key) && e.preventDefault()
-                        }   
+                        }
                         value={firstname}
                         onChange={(e) => setFirstname(e.target.value)}
                         placeholder="Name"
@@ -185,11 +185,53 @@ const Edituser = () => {
                     >
                       Gender:
                     </label>
-                    <div className="control" value={gender} onChange = {(e) => setGender(e.target.value)}>
-          <input type="radio" className="form-check-input" defaultValue="male" id="male" name="gender" formcontrolname="gender" style={{marginTop:-1 , marginLeft:30}} /> <br />
-          <label className="form-check-label" htmlFor="male"style={{marginLeft:20 , fontWeight:800 , color:"black"}} >Male</label>
-          <input type="radio" className="form-check-input" defaultValue="female" id="female" name="gender" formcontrolname="gender" style={{marginTop:-50 , marginLeft:90}} />
-          <label className="form-check-label" htmlFor="male" style={{marginTop:-30 , marginLeft:90 , fontWeight:800 , color:"black"}} >Female</label>
+                    <div
+                      className="control"
+                      value={gender}
+                      onChange={(e) => setGender(e.target.value)}
+                    >
+                      <input
+                        type="radio"
+                        className="form-check-input"
+                        defaultValue="male"
+                        id="male"
+                        name="gender"
+                        formcontrolname="gender"
+                        style={{ marginTop: -1, marginLeft: 30 }}
+                      />{" "}
+                      <br />
+                      <label
+                        className="form-check-label"
+                        htmlFor="male"
+                        style={{
+                          marginLeft: 20,
+                          fontWeight: 800,
+                          color: "black",
+                        }}
+                      >
+                        Male
+                      </label>
+                      <input
+                        type="radio"
+                        className="form-check-input"
+                        defaultValue="female"
+                        id="female"
+                        name="gender"
+                        formcontrolname="gender"
+                        style={{ marginTop: -50, marginLeft: 90 }}
+                      />
+                      <label
+                        className="form-check-label"
+                        htmlFor="male"
+                        style={{
+                          marginTop: -30,
+                          marginLeft: 90,
+                          fontWeight: 800,
+                          color: "black",
+                        }}
+                      >
+                        Female
+                      </label>
                     </div>
                   </div>
                   <div
@@ -252,7 +294,7 @@ const Edituser = () => {
         </Card>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Edituser
+export default Edituser;
